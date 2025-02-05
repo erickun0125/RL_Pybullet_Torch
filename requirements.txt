@@ -1,5 +1,5 @@
 torch>=1.7.0
-gym
+gym==0.23.1
 pybullet
 numpy
 pandas

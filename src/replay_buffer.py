@@ -1,3 +1,4 @@
+# src/replay_buffer.py
 import random
 import numpy as np
 
@@ -18,4 +19,8 @@ class ReplayBuffer:
     def sample(self, batch_size):
         batch = random.sample(self.storage, batch_size)
         states, actions, rewards, next_states, dones = zip(*batch)
-        return np.array(states), np.array(actions), np.array(rewards).reshape(-1, 1), np.array(next_states), np.array(dones).reshape(-1, 1)
+        return (np.array(states),
+                np.array(actions),
+                np.array(rewards).reshape(-1, 1),
+                np.array(next_states),
+                np.array(dones).reshape(-1, 1))

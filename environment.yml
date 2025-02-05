@@ -1,0 +1,19 @@
+name: rl_pybullet_torch
+channels:
+  - defaults
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pytorch
+  - torchvision
+  - torchaudio
+  - cpuonly
+  - pip
+  - tensorboard  # TensorBoard 추가
+  - pip:
+      - pybullet
+      - jupyter
+      - numpy
+      - gym==0.23.1  # 호환되는 Gym 버전 고정
+      - matplotlib

@@ -97,3 +97,17 @@ class SACAgent:
     def soft_update(self, target, source, tau):
         for target_param, param in zip(target.parameters(), source.parameters()):
             target_param.data.copy_(tau * param.data + (1 - tau) * target_param.data)
+
+    def save(self, path):
+        checkpoint = {
+            'actor_state_dict': self.actor.state_dict(),
+            'critic_state_dict': self.critic.state_dict(),
+            'log_alpha': self.log_alpha.detach().cpu()
+        }
+        torch.save(checkpoint, path)
+
+    def load(self, path):
+        checkpoint = torch.load(path, map_location=self.device)
+        self.actor.load_state_dict(checkpoint['actor_state_dict'])
+        self.critic.load_state_dict(checkpoint['critic_state_dict'])
+        self.log_alpha = checkpoint['log_alpha'].to(self.device)
